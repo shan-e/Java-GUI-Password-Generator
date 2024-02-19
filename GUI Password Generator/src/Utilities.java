@@ -1,22 +1,21 @@
+import java.util.Random;
+
 public class Utilities {
-    public void clearConsole() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+
+    public static char randomChar() {
+        Random rand = new Random();
+        int charCategory = rand.nextInt(6);
+        if (charCategory == 0) return (char) (33 + rand.nextInt(15));
+        else if (charCategory == 1) return (char) (58 + rand.nextInt(7));
+        else if (charCategory == 2) return (char) (91 + rand.nextInt(6));
+        else if (charCategory == 3) return (char) (97 + new Random().nextInt(26));
+        else if (charCategory == 4) return (char) (65 + new Random().nextInt(26));
+        else return (char) (123 + rand.nextInt(4));
     }
 
-    public void printOptions() {
-        System.out.println("\nWhat password layout do you require");
-        System.out.println("A. Lower case only");
-        System.out.println("B. Upper case only");
-        System.out.println("C. Upper case & lower case");
-        System.out.println("D. Lower case & special characters");
-        System.out.println("E. Upper case & special characters");
-        System.out.println("F. Only special characters");
-        System.out.println("G. All of the above");
+    public static String generatePassword(int length) {
+        char[] password = new char[length];
+        for (int i = 0; i < length; i++) password[i] = randomChar();
+        return new String(password);
     }
-
-    public void printSwitchCaseErrorMsg() {
-        System.out.println("Must be a letter between A and G!!");
-    }
-
 }
