@@ -1,5 +1,15 @@
-import javax.swing.*;
+/**
+ * Author:  Shane Easo
+ * Email:   shane.easo@ucdconnect.ie
+ * GitHub:  shan-e
+ * Created:   08.02.2024
+ * Description:
+ * This is a small project I had been working on in my spare time.
+ * It is a GUI interface for a very basic password generator.
+ * Resources were obtained from my lecture notes and Oracle documentation
+ **/
 
+import javax.swing.*;
 // info window about password stats
 // have type of password chooser
 // regions with numerical values will be measured in pixels
@@ -93,8 +103,7 @@ public class PasswordGenerator implements Runnable {
             password = Utilities.generatePassword(passwordLength);
             // change the output text to contain the newly generated password
             finalPasswordTextOutput.setText("Your unique password consisting of " + passwordLength + " characters is " + password);
-            // hee-hee
-            System.out.println("Generating new password, hope the password is secure enough (You're not meant to see this - run while you still can!!?!) BOOO!");
+            System.out.println("Generating new password, hope the password is secure enough (You're not meant to see this - run while you still can!!?!) BOOO!"); // hee-hee
         });
         jPanel.add(generatePasswordButton); // add the generate button to the JPanel
 
