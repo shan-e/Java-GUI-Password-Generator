@@ -1,8 +1,9 @@
 import java.util.Random;
 
 public class Utilities {
-    public static char generateAnyCharacter() {
-        Random random = new Random(); // creating random object
+    private static final Random random = new Random(); // global random object instance that can be used anywhere within the class
+
+    public static char generateAnyPasswordCharacter() {
         // charCategory dictates which section/region of the ASCII table to use to generate a random char
         int charCategory = random.nextInt(3);
         // if the random number matches any of the conditions, it will generate a random number
@@ -11,17 +12,12 @@ public class Utilities {
         else if (charCategory == 1) return generateUpperCaseCharacter();
         else return generateSpecialCharacter();
     }
-
-    public static char generateUpperCaseCharacter() {
-        return (char) (65 + new Random().nextInt(26)); // characters A-Z
-    }
-
-    public static char generateLowerCaseCharacter() {
-        return (char) (97 + new Random().nextInt(26)); // characters a-z
-    }
+    // characters A-Z
+    public static char generateUpperCaseCharacter() { return (char) (65 + random.nextInt(26)); }
+    // characters a-z
+    public static char generateLowerCaseCharacter() { return (char) (97 + random.nextInt(26)); }
 
     public static char generateSpecialCharacter() {
-        Random random = new Random(); // creating random object
         // charCategory dictates which section/region of the ASCII table to use to generate a random char
         int charCategory = random.nextInt(4);
         // if the random number matches any of the conditions, it will generate a random number
@@ -32,8 +28,7 @@ public class Utilities {
         else return (char) (123 + random.nextInt(4));  // characters { | } ~
     }
 
-    public static char upperOrLowerCharacter() {
-        Random random = new Random(); // creating random object
+    public static char generateUpperOrLowerCharacter() {
         // charCategory dictates which section/region of the ASCII table to use to generate a random char
         int charCategory = random.nextInt(2);
         // if the random number matches any of the conditions, it will generate a random number
@@ -42,8 +37,7 @@ public class Utilities {
         else return generateUpperCaseCharacter();
     }
 
-    public static char upperOrSpecialCharacter() {
-        Random random = new Random(); // creating random object
+    public static char generateUpperOrSpecialCharacter() {
         // charCategory dictates which section/region of the ASCII table to use to generate a random char
         int charCategory = random.nextInt(2);
         // if the random number matches any of the conditions, it will generate a random number
@@ -52,8 +46,7 @@ public class Utilities {
         else return generateUpperCaseCharacter();
     }
 
-    public static char lowerOrSpecialCharacter() {
-        Random random = new Random(); // creating random object
+    public static char generateLowerOrSpecialCharacter() {
         // charCategory dictates which section/region of the ASCII table to use to generate a random char
         int charCategory = random.nextInt(2);
         // if the random number matches any of the conditions, it will generate a random number
@@ -64,41 +57,18 @@ public class Utilities {
 
     public static String generatePassword(int passwordLength, int option) {
         // creating a char array to store a random ASCII character, given the length required for the password
-        char[] passwordAsCharArray = new char[passwordLength];
-
+        char[] passwordAsCharArray = new char[passwordLength]; // password first a char array to insert char at every increment
+        // switch case dictates which option should be run from combo-box
         switch (option) {
-            case 0:
-                for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateLowerCaseCharacter();
-                break;
-            case 1:
-                for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateUpperCaseCharacter();
-                break;
-
-            case 2:
-                for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = upperOrLowerCharacter();
-                break;
-            case 3:
-                for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = lowerOrSpecialCharacter();
-                break;
-
-            case 4:
-                for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = upperOrSpecialCharacter();
-                break;
-            case 5:
-                for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateSpecialCharacter();
-                break;
-
-            case 6:
-                for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateAnyCharacter();
-                break;
-
-            default:
-                System.err.println("Must be a numerical value passed into function");
-
+            case 0: for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateLowerCaseCharacter(); break;
+            case 1: for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateUpperCaseCharacter(); break;
+            case 2: for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateUpperOrLowerCharacter(); break;
+            case 3: for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateLowerOrSpecialCharacter(); break;
+            case 4: for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateUpperOrSpecialCharacter(); break;
+            case 5: for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateSpecialCharacter(); break;
+            case 6: for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateAnyPasswordCharacter(); break;
+            default: System.err.println("Must be a numerical value passed into function"); // standard debug error checking
         }
-        // here we loop through the array until the password length is reached
-        // for each increment of the loop, add a random character to the specific index
-//        for (int i = 0; i < passwordLength; i++) passwordAsCharArray[i] = generateRandomCharacter();
         return new String(passwordAsCharArray); // return the char array cast as a String
     }
 }
