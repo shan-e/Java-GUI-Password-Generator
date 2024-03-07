@@ -9,5 +9,5 @@
  * Resources were obtained from my lecture notes and Oracle documentation
  **/
 
-// creating an instance of the PasswordGenerator class and using my implemented run function to display the window (JFrame) and contents (JPanels)
+// creating an instance of the PasswordGenerator class and using my implemented run function to display the window (JFrame) and contents (JPanel)
 public class Main { public static void main(String[] args) { new PasswordGenerator().run(); } }
