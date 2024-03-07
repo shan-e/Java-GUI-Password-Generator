@@ -1,7 +1,7 @@
 /**
- * Author:  Shane Easo
- * Email:   shane.easo@ucdconnect.ie
- * GitHub:  shan-e
+ * Author:    Shane Easo
+ * Email:     shane.easo@ucdconnect.ie
+ * GitHub:    shan-e
  * Created:   08.02.2024
  * Description:
  * This is a small project I had been working on in my spare time.
@@ -9,9 +9,5 @@
  * Resources were obtained from my lecture notes and Oracle documentation
  **/
 
-public class Main {
-    public static void main(String[] args) {
-        PasswordGenerator passwordGenerator = new PasswordGenerator(); // creating an instance of the PasswordGenerator class
-        passwordGenerator.run(); // using my implemented run function to display the window (JFrame) and contents (JPanels)
-    }
-}
+// creating an instance of the PasswordGenerator class and using my implemented run function to display the window (JFrame) and contents (JPanels)
+public class Main { public static void main(String[] args) { new PasswordGenerator().run(); } }
