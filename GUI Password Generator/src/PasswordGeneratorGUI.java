@@ -80,7 +80,8 @@ public class PasswordGeneratorGUI implements Runnable, ActionListener {
         // lambda to detect slider value change and update the final text to the instructions to re-generate a new password
         slider.addChangeListener(e -> {
             passwordLength = slider.getValue();
-            passwordLabel.setText("Press Generate to regenerate a random unique password consisting of " + passwordLength + " characters");
+            password = null;
+            passwordLabel.setText("Press Generate to create a random unique password consisting of " + passwordLength + " characters");
         });
 
         generatePasswordButton = new JButton("Generate");
@@ -124,11 +125,14 @@ public class PasswordGeneratorGUI implements Runnable, ActionListener {
     }
 
     private static void writePasswordToFile(String password) throws IOException {
-        LocalDateTime localDateTime = LocalDateTime.now(); // get epoch time
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("[HH:mm:ss dd-MM-yy]");
-        String passwordWithTimestamp = localDateTime.format(dateTimeFormatter) + " " + password + "\n";
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("saved-passwords.csv", true))) { bufferedWriter.write(passwordWithTimestamp); }
-        catch (IOException e) { System.err.println("Error: " + e.getMessage()); }
+        if (password == null) JOptionPane.showMessageDialog(null, "Bruh. Generate a password first", "Nahhh frr 💀💀", JOptionPane.ERROR_MESSAGE, new ImageIcon("GUI Password Generator/src/me_asf.gif"));
+        else {
+            LocalDateTime localDateTime = LocalDateTime.now(); // get epoch time
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yy");
+            String passwordWithTimestamp = "[" + localDateTime.format(dateTimeFormatter) + "] " + password + "\n";
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("GUI Password Generator/src/saved-passwords.csv", true))) { bufferedWriter.write(passwordWithTimestamp); }
+            catch (IOException e) { System.err.println("Error: " + e.getMessage()); }
+        }
     }
 
     private static JMenuBar createMenuBar() {
