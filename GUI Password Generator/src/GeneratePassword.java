@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Utilities {
+public class GeneratePassword {
     private static final Random random = new Random();
 
     private static char generateAnyPasswordCharacter() {

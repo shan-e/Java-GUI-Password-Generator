@@ -88,7 +88,7 @@ public class PasswordGeneratorGUI implements Runnable, ActionListener {
         generatePasswordButton.setBounds(377, 220, 100, 50);
         // lambda, if pressed, generate new password and show via jlabel
         generatePasswordButton.addActionListener(e -> {
-            password = Utilities.generatePassword(passwordLength, option);
+            password = GeneratePassword.generatePassword(passwordLength, option);
             passwordLabel.setText("Your unique password consisting of " + passwordLength + " characters is " + password);
             System.out.println("Generating new password, hope the password is secure enough (You're not meant to see this - run while you still can!!?!)"); // hee-hee
         });
