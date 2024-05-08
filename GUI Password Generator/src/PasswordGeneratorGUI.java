@@ -4,6 +4,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
@@ -124,13 +125,10 @@ public class PasswordGeneratorGUI implements Runnable, ActionListener {
 
     private static void writePasswordToFile(String password) throws IOException {
         LocalDateTime localDateTime = LocalDateTime.now(); // get epoch time
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yy");
-        String dateAndTime = localDateTime.format(dateTimeFormatter) + " " + password;
-        System.out.println(dateAndTime);
-
-        FileWriter fileWriter = new FileWriter("./saved-passwords.csv", false);
-        fileWriter.write(dateAndTime);
-        fileWriter.close();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("[HH:mm:ss dd-MM-yy]");
+        String passwordWithTimestamp = localDateTime.format(dateTimeFormatter) + " " + password + "\n";
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("saved-passwords.csv", true))) { bufferedWriter.write(passwordWithTimestamp); }
+        catch (IOException e) { System.err.println("Error: " + e.getMessage()); }
     }
 
     private static JMenuBar createMenuBar() {
@@ -138,8 +136,17 @@ public class PasswordGeneratorGUI implements Runnable, ActionListener {
 
         JMenu fileMenu = new JMenu("File");
         JMenuItem copyPassword = new JMenuItem("Copy Password");
+        JMenuItem writeToFile = new JMenuItem("Write To File");
+        writeToFile.addActionListener(e -> {
+            try {
+                writePasswordToFile(password);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         copyPassword.addActionListener(e -> copyToClipboard(password));
         fileMenu.add(copyPassword);
+        fileMenu.add(writeToFile);
 
         JMenu viewMenu = new JMenu("View");
         JMenu appearance = new JMenu("Appearance");
