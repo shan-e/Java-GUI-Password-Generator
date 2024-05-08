@@ -129,7 +129,7 @@ public class PasswordGeneratorGUI implements Runnable, ActionListener {
         else {
             LocalDateTime localDateTime = LocalDateTime.now(); // get epoch time
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yy");
-            String passwordWithTimestamp = "[" + localDateTime.format(dateTimeFormatter) + "] " + password + "\n";
+            String passwordWithTimestamp = "[" + localDateTime.format(dateTimeFormatter) + "]," + password + "\n";
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("GUI Password Generator/src/saved-passwords.csv", true))) { bufferedWriter.write(passwordWithTimestamp); }
             catch (IOException e) { System.err.println("Error: " + e.getMessage()); }
         }
