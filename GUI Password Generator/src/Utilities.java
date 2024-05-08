@@ -12,10 +12,8 @@ public class Utilities {
         else if (charCategory == 1) return generateUpperCaseCharacter();
         else return generateSpecialCharacter();
     }
-    // characters A-Z
-    public static char generateUpperCaseCharacter() { return (char) (65 + random.nextInt(26)); }
-    // characters a-z
-    public static char generateLowerCaseCharacter() { return (char) (97 + random.nextInt(26)); }
+    public static char generateUpperCaseCharacter() { return (char) (65 + random.nextInt(26)); } // characters A-Z
+    public static char generateLowerCaseCharacter() { return (char) (97 + random.nextInt(26)); } // characters a-z
 
     public static char generateSpecialCharacter() {
         // charCategory dictates which section/region of the ASCII table to use to generate a random char
